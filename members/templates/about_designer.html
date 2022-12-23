@@ -1,0 +1,175 @@
+{% extends 'base.html' %}
+
+{% block title %}
+<meta name="description" content="Форум дизайнеров">
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="CHARME DESIGN" />
+<meta property="og:url" content="https://sklad.charmestone.ru" />
+<title> Шарм дизайн | {{designer.username}}</title> 
+<meta property="og:title" content={{designer.username}} />
+<meta property="og:image" content={{designer.profile.profile_pic.url}} />
+{% if designer.profile.bio %}
+<meta property="og:description" content={{designer.profile.bio}} />
+{% endif %}
+{% endblock %}
+
+
+{% block content %}
+<div class="view-wrapper is-full">
+<div class="stories-wrapper is-home">
+
+{% include 'includes/designer_sidebar.html' %}
+<div class="inner-wrapper">
+                <a class="mobile-sidebar-trigger is-home-v2">
+                    <i data-feather="menu"></i>
+                </a>
+<div class="view-wrapper is-sidebar-v1 is-fold">  
+<div id="pages-about" class="container sidebar-boxed" data-open-sidebar data-page-title="About">          
+<div class="view-wrap is-headless">
+
+<div class="columns has-portrait-padding">
+                    <div class="column is-4">
+
+                        <!-- Community widget -->
+                        <!-- html/partials/pages/widgets/page-community-widget.html -->
+
+                        <div class="basic-infos-wrapper">
+                            <div class="card is-friendkit">
+                                <div class="title-wrap">
+                                    <h4>Биография</h4>
+                                </div>
+                                {% if designer.profile.bio %}
+                                <p>{{designer.profile.bio}}</p>
+                                {% endif %}
+                                <div class="created">
+                                    <i data-feather="flag"></i>
+                                    <span>на сайте с {{designer.date_joined}}</span>
+                                </div>
+                            </div>
+                            <div class="card is-community">
+                                <h4></h4>
+                                <div class="flex-block">
+                                    <i data-feather="database"></i>
+                                    <p>{{number_of_posts}} проектов</p>
+                                </div>
+                                <div class="flex-block">
+                                    <i data-feather="cast"></i>
+                                    <p>{{designer.profile.friend_request.all|length}} подписчиков</p>
+                                </div>
+                            </div>
+
+                        </div>
+                        <!-- Related pages widget -->
+                        <!-- html/partials/pages/widgets/pages-related-pages-widget.html -->
+                    </div>
+
+                    <div class="column is-8">
+
+                        <div class="card page-about-card">
+                            <div class="card-title">
+                                <h4>Обо {{designer.username}}</h4>
+                            </div>
+                            <div class="about-body">
+                                <div class="columns">
+                                    <div class="column is-5">
+                                        <div class="about-block">
+                                            <div class="block-header">
+                                                <h4>Контактная информация</h4>
+                                            </div>
+                                            <div class="block-content">
+                                                {% if designer.profile.mobile %}
+                                                <div class="flex-inner">
+                                                    <i data-feather="phone"></i>
+                                                    <span><a href="tel:{{designer.profile.mobile}}">Позвонить по номеру телефона</a></span>
+                                                </div>
+                                                <div class="flex-inner">
+                                                    <i data-feather="message-circle"></i>
+                                                    <span>Отправить <a href="https://api.whatsapp.com/send?phone={{designer.profile.mobile}}&text=%D0%97%D0%B4%D1%80%D0%B0%D0%B2%D1%81%D1%82%D0%B2%D1%83%D0%B9%D1%82%D0%B5%2C+%D0%B2%D1%8B+%D0%BC%D0%BE%D0%B6%D0%B5%D1%82%D0%B5+%D0%BC%D0%BD%D0%B5+%D0%BF%D0%BE%D0%BC%D0%BE%D1%87%D1%8C%3F">сообщение</a></span>
+                                                </div>
+                                                {% endif %}
+                                                {% if designer.profile.website %}
+                                                <div class="flex-inner">
+                                                    <i data-feather="globe"></i>
+                                                    <span><a href="https://{{designer.profile.website}}">{{designer.profile.website}}</a></span>
+                                                </div>
+                                                {% endif %}
+                                {% if user.id == designer.id %}
+                                <div class="flex-inner">
+                                    <i data-feather="edit-3"></i>
+                                    <p class="ml-2"><a href={% url 'edit_profile' designer.profile.id %}>редактировать профиль</a></p>
+                                </div> 
+                                {% endif %}
+                                            </div>
+                                        </div>
+
+                                        <div class="about-block">
+                                            <div class="block-header">
+                                                <h4>учёба</h4>
+                                            </div>
+                                            <div class="block-content">
+                                                {% if designer.education_set.all|length > 0 %}
+                                                {% for edu in designer.education_set.all %}
+                                                <div class="flex-inner has-meta">
+                                                    <i class="mdi mdi-office-building"></i>
+                                                    <div class="meta">
+                                                        <span>Учебное заведение </span>
+                                                        <span>{{edu.education_place}}</span>
+                                                    </div>
+
+                                                </div> 
+                                            {% endfor %}
+                                            {% else %}
+                                            <small>этот пользователь не предоставил информацию о учёбе
+                                            {% endif %}</small>
+                                {% if user.id == designer.id %}
+                                <div class="flex-inner">
+                                    <i data-feather="edit-3"></i>
+                                    <p class="ml-2"><a href={% url 'edit_work' %}>редактировать</a></p>
+                                </div> 
+                                {% endif %}
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="column is-6">
+                                        <div class="about-block">
+                                            <div class="block-header">
+                                                <h4>Работа</h4>
+                                            </div>
+                                            <div class="block-content">
+                                                {% if designer.work_set.all|length > 0 %}
+                                                {% for work in designer.work_set.all %}
+                                                <div class="flex-inner has-meta">
+                                                    <i class="mdi mdi-office-building"></i>
+                                                    <div class="meta">
+                                                        <span>{{work.work_place}} </span>
+                                                        <span>{{work.work_date}}'s</span>
+                                                    </div>
+
+                                                </div> 
+                                            {% endfor %}
+                                            {% else %}
+                                            <small>этот пользователь не предоставил информацию о работе
+                                            {% endif %}</small>
+                                {% if user.id == designer.id %}
+                                <div class="flex-inner">
+                                    <i data-feather="edit-3"></i>
+                                    <p class="ml-2"><a href={% url 'edit_work' %}>редактировать</a></p>
+                                </div> 
+                                {% endif %}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                </div>
+            </div>
+</div>
+<!-- </div> -->
+ </div>
+</div>
+
+{% endblock %}

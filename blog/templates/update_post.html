@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+{% block title %}
+<title> Шарм дизайн | Форум дизайнеров</title>
+{% endblock %}
+{% block content %}
+{% if user.is_authenticated %}
+<div class="view-wrapper">
+    <div id="general-settings" class="settings-section is-active">
+        <div class="settings-panel">
+            <div class="title-wrap">
+                <h2></h2>
+            </div>
+            <form class="note-form" method="post">
+                {% csrf_token %}
+                <div class="settings-form-wrapper">
+                    <div class="settings-form">
+                        <div id="selected_pics" class="columns is-multiline">
+                            {% for field in form %}
+                            {% if field.name == "title" %}
+                            <div class="column is-12">
+                                <!--Field-->
+                                <fieldset class="field field-group">
+                                    <label for="id_{{ field.name }}">Заголовок публикации</label>
+                                    <div class="control">
+                                        <input type="text" class="input is-fade" name="{{ field.name }}" id="id_{{ field.name }}" value="{{ field.value }}">
+                                    </div>
+                                </fieldset>
+                            </div>
+                            {% elif field.name == "description" %}
+                            <div class="column is-12">
+                                <!--Field-->
+                                <fieldset class="field field-group">
+                                    <label for="id_{{ field.name }}">Описание</label>
+                                    <div class="control">
+                                        <textarea value="{{ field.value }}" id="id_{{ field.name }}" name="{{ field.name }}" type="text" class="textarea is-fade" rows="10">{{ field.value }}</textarea>
+                                    </div>
+                                </fieldset>
+                            </div>
+                            {% elif field.name == "category" %}
+                            <div class="column is-12 is-hidden">
+                                <!--Field-->
+                                <fieldset class="field field-group">
+                                    <label for="id_{{ field.name }}">Категория публикации</label>
+                                    <div class="control">
+                                        <input type="text" class="input is-fade" name="{{ field.name }}" id="id_{{ field.name }}" value="{{ field.value }}">
+                                    </div>
+                                </fieldset>
+                            </div>
+                            {% endif %}
+                            {% endfor %}
+                            <div class="column is-6">
+                                <div class="buttons">
+                                    <button type="submit" class="button is-solid accent-button form-button">Сохранить изменения</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endif %}
+{% endblock %}

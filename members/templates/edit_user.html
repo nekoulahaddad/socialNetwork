@@ -1,0 +1,163 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="view-wrapper is-full">
+    {% include 'includes/sidebar.html' %}
+
+    <div class="settings-wrapper">
+        <!-- /partials/settings/sections/general-settings.html -->
+        <div id="general-settings" class="settings-section is-active">
+            <div class="settings-panel">
+                <div class="title-wrap">
+                    <a class="mobile-sidebar-trigger">
+                        <i data-feather="menu"></i>
+                    </a>
+                    <h2>Общая информация</h2>
+                </div>
+                <form class="profile-form" method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <div class="settings-form-wrapper">
+                        <div class="settings-form">
+                            <div class="columns is-multiline">
+                            {% for field in form %}
+                            {% if field.name == "firstname" %}
+                                <div class="column is-6">
+                                    <div class="field field-group">
+                                        <label>Имя</label>
+                                        <div class="control has-icon">
+                                        <input type="text" class="input is-fade" name="{{ field.name }}" id="id_{{ field.name }}" value="{{ field.value }}">
+                                            <div class="form-icon">
+                                                <i data-feather="user"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            {% elif field.name == "lastname" %}
+                                <div class="column is-6">
+                                    <div class="field email-field field-group">
+                                        <label>Эл. почта</label>
+                                        <div class="control has-icon">
+                                        <input type="text" disabled class="input is-fade" value="{{user.email}}">
+                                            <div class="form-icon">
+                                                <i data-feather="mail"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="column is-6">
+                                    <div class="field field-group">
+                                        <label>Фамилия</label>
+                                        <div class="control has-icon">
+                                        <input type="text" class="input is-fade" name="{{ field.name }}" id="id_{{ field.name }}" value="{{ field.value }}">
+                                            <div class="form-icon">
+                                                <i data-feather="user"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            {% elif field.name == "mobile" %}
+                                <div class="column is-6">
+                                    <div class="field field-group">
+                                        <label>Номер телефона</label>
+                                        <div class="control has-icon">
+                                        <input type="text" class="input is-fade" name="{{ field.name }}" id="phone-number-field" pattern="[7-8]{1}[-][0-9]{3}[-][0-9]{3}[-][0-9]{4}" maxlength="12" title="Пожалуйста введите правильный номер телефона" value="{{ field.value }}">
+                                            <div class="form-icon">
+                                                <i data-feather="phone"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            {% elif field.name == "bio" %}
+                                <div class="column is-12">
+                                    <div class="field field-group">
+                                        <label>Биография</label>
+                                        <div class="control">
+                                        <textarea value="{{ field.value }}" id="id_{{ field.name }}" name="{{ field.name }}" type="text" class="textarea is-fade" rows="2">{{ field.value }}</textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                            {% elif field.name == "website" %}
+                                <div class="column is-6">
+                                    <!--Field-->
+                                    <div class="field field-group is-autocomplete">
+                                        <label>Веб-сайт</label>
+                                        <div class="control has-icon">
+                                        <input type="text" class="input is-fade" name="{{ field.name }}" id="id_{{ field.name }}" value="{{ field.value }}">
+                                            <div class="form-icon">
+                                                <i data-feather="globe"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            {% elif field.name == "city" %}
+                                <div class="column is-6">
+                                    <div class="field field-group">
+                                        <label>Город</label>
+                                        <div class="control has-icon">
+                                        <input type="text" class="input is-fade" name="{{ field.name }}" id="id_{{ field.name }}" value="{{ field.value }}">
+                                            <div class="form-icon">
+                                                <i data-feather="map-pin"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            {% endif %}
+                            {% endfor %}
+                            </div>
+                        </div>
+                        <div class="illustration">
+
+            <div class="image-upload-wrapper">
+                    <div class="process">
+                            <div class="photo_upload">
+                                <div class="preview">
+                                <div id="profileImage" class="upload">
+                                    <i data-feather="plus"></i>
+                                </div>
+                                <img id="upload-preview" src="{{user.profile.profile_pic.url}}" alt="">
+                                <input type="file" name="profile_pic" class="is-hidden" id="imageUpload">
+                                </div>
+                            </div>
+                    </div>
+            </div>
+                            <p>тут вы можете изменить свою личную информацию, если у вас какие-то вопросы Обратитесь к нам <a href="https://sklad.charmestone.ru/">charmastone</a></p>
+                        </div>
+
+                    </div>
+                    <div class="mt-3  column is-12">
+                        <div class="buttons">
+                            <button type="submit" class="button is-solid accent-button form-button">Сохранить изменения</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+{% block scripts %}
+{% load static %}
+<script src="{% static 'js/settings.js' %}"></script>
+<script>
+const preview = document.getElementById('upload-preview')
+const selected_pic = document.getElementById('imageUpload') 
+selected_pic.onchange = evt => {
+  const [file] = selected_pic.files
+  if (file) {
+    preview.src = URL.createObjectURL(file)
+  }
+} 
+
+$('#phone-number-field').keyup(function(){
+    $(this).val($(this).val().replace(/(\d{1})\-?(\d{3})\-?(\d{3})\-?(\d{4})/,'8-$2-$3-$4'))
+});
+
+$('#phone-number-field').keydown(function(){
+    $(this).val($(this).val().replace('+7','8'))
+});    
+
+
+
+</script>
+{% endblock scripts %}
+
+

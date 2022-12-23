@@ -1,0 +1,308 @@
+{% extends 'base.html' %}
+{% block title %}
+<meta name="description" content={{post.description}}>
+<title>{{post.title}}</title> 
+{% endblock %}
+{% block css %}
+<link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css">
+{% endblock %}
+{% block content %}
+<div class="view-wrapper is-full">
+    <div class="stories-wrapper is-home">
+        <!-- sidebar -->
+        {% include 'includes/designer_sidebar.html' %}
+        <!-- Stories -->
+        <div class="inner-wrapper">
+            <a class="mobile-sidebar-trigger is-story-post is-home-v2">
+                <i data-feather="menu"></i>
+            </a>
+            <!-- Story -->
+            <div class="story-post-wrapper">
+                <div class="story-post">
+                    <div class="post-title">
+                        <h2>{{post.title}}</h2>
+                        <!--Dropdown-->
+                        <div class="dropdown is-spaced is-right is-accent dropdown-trigger">
+                            <div>
+                                <div class="button is-rounded">
+                                    {{post.author}}
+                                </div>
+                            </div>
+                            <div class="dropdown-menu" role="menu">
+                                <div class="dropdown-content">
+                                    <a href="#" class="dropdown-item">
+                                        <div class="media">
+                                            <i data-feather="wind"></i>
+                                            <div class="media-content">
+                                                <h3>Today</h3>
+                                                <small>View today's posts.</small>
+                                            </div>
+                                        </div>
+                                    </a>
+                                    <a class="dropdown-item">
+                                        <div class="media">
+                                            <i data-feather="calendar"></i>
+                                            <div class="media-content">
+                                                <h3>This Week</h3>
+                                                <small>View this week's posts.</small>
+                                            </div>
+                                        </div>
+                                    </a>
+                                    <a class="dropdown-item">
+                                        <div class="media">
+                                            <i data-feather="archive"></i>
+                                            <div class="media-content">
+                                                <h3>This Month</h3>
+                                                <small>View this month's posts.</small>
+                                            </div>
+                                        </div>
+                                    </a>
+                                    <hr class="dropdown-divider">
+                                    <a href="#" class="dropdown-item">
+                                        <div class="media">
+                                            <i data-feather="users"></i>
+                                            <div class="media-content">
+                                                <h3>Close Friends</h3>
+                                                <small>Restrict to close friends.</small>
+                                            </div>
+                                        </div>
+                                    </a>
+                                    <a href="#" class="dropdown-item">
+                                        <div class="media">
+                                            <i data-feather="heart"></i>
+                                            <div class="media-content">
+                                                <h3>Popular</h3>
+                                                <small>Show popular posts.</small>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="post-image-wrap">
+                        <img class="post-image" src="{{post.post_main_pic.url}}" alt="">
+                    </div>
+                    <div class="post-meta">
+                        <div class="post-author">
+                            <div class="story-avatar">
+                                <a href={% url 'profile' post.author %}>
+                                    <img class="avatar" src="{{post.author.profile.profile_pic.url}}" data-user-popover="2" alt="">
+                                </a>
+                            </div>
+                            <div class="meta">
+                                <span>{{post.author}}</span>
+                                {% load humanize %}
+                                <span>{{post.post_date|naturaltime}}</span>
+                            </div>
+                        </div>
+                        <div class="post-stats">
+                            <div class="stat-item">
+                                <form action="{% url 'like-post-view' %}" method="POST" class='like-form' id='{{post.id}}'>
+                                    {% csrf_token %}
+                                    <input type="hidden" name="post_id" value={{post.id}}>
+                                    {% if user not in post.liked.all %}
+                                    <button type="submit" class="like_fix details_button like-btn{{post.id}}">
+                                        <i data-feather="heart"></i>
+                                    </button>
+                                    {% else %}
+                                    <button type="submit" class="like_fix details_button is-liked like-btn{{post.id}}">
+                                        <i data-feather="heart"></i>
+                                    </button>
+                                    {% endif %}
+                                </form>
+                                <span class="like-count{{post.id}}">{{post.num_likes}}</span>
+                            </div>
+                            <div class="stat-item">
+                                <i data-feather="message-circle"></i>
+                                <span>{{post.comments.all|length}}</span>
+                            </div>
+                            <div class="stat-item">
+                                <i data-feather="eye"></i>
+                                <span>{{post.views}}</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="post-text content">
+                        <p>{{post.description}}
+                        </p>
+                    </div>
+                    {% if user.is_authenticated %}
+                    <form method="POST" action="{% url 'design-detail' post.pk %}">
+                        {% csrf_token %}
+                        
+                    <div class="post-compose">
+                        <div class="control">
+                            {{form}}
+                        </div>
+                        <div class="compose-controls">
+                            <img class="avatar" src="{{user.profile.profile_pic.url}}"  data-user-popover="0" alt="">
+                            <button id="comment_btn" class="button is-solid accent-button raised">комментировать</button>
+                        </div>
+                    </div>
+                </form>
+                {% endif %}
+                    {% if post_images|length > 1 %}
+                    <!-- Swiper -->
+                    <div class=container-swiper>
+                        <div class="swiper-container mySwiper">
+                            <div class="swiper-wrapper">
+                                {% for image in post_images %}
+                                {% if forloop.first %}
+                                {% else %}
+                                <div class="swiper-slide">
+                                    <img id="{{image.id}}" class="post-image" src="{{image.mainimage.url}}" alt="">
+                                </div>
+                                {% endif %}
+                                {% endfor %}
+                            </div>
+                            <div class="swiper-button-next"></div>
+                            <div class="swiper-button-prev"></div>
+                            <div class="swiper-pagination"></div>
+                        </div>
+                    </div>
+                    <!-- Swiper JS -->
+                    {% endif %}
+                    <div class="comments-wrap">
+                        <div class="comments-count">
+                            <h3>Комментарии ({{post.comments.all|length}})</h3>
+                        </div>
+                        {% if not post.comments.all %}
+
+                        {% else %}
+                        {% for comment in post.comments.all %}
+
+                        <div class="media is-comment">
+                            <figure class="media-left">
+                                <div class="avatar-wrap is-smaller">
+                                    <a href={% url 'profile' post.author %}>
+                                    <img src="{{ comment.user.profile.profile_pic.url}}" alt="">
+                                    </a>
+                                </div>
+                            </figure>
+                            <div class="media-content">
+                                <div class="comment-meta">
+                                    {% load humanize %}
+                                    <h4><a>{{ comment.user }}</a> <small>{{ comment.add_time|naturaltime }}</small></h4>
+                                    <p>{{ comment.comment }}</p>
+                                </div>
+                                <div class="comment-stats-wrap">
+                                    <div class="comment-stats">
+                                        <div class="stat is-likes">
+                                            <i data-feather="thumbs-up"></i>
+                                            <span>0</span>
+                                        </div>
+                                    </div>
+                                    <div class="comment-actions">
+                                        <a class="comment-action is-like">
+                                            <i data-feather="thumbs-up"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    
+                    {% endfor %}
+                    {% endif %}
+                    </div>
+                </div>
+            </div>
+            <!--Story post sidebar-->
+            <div class="story-post-sidebar">
+                <div class="header">
+                    <h2>Рекомендуемые публикации</h2>
+                </div>
+                <div class="related-posts">
+                    <!--Related post-->
+                    {% for post in recomended_posts %}
+                    <a href={% url 'design-detail' post.pk %} class="related-post">
+                        <img class="post-image" src="{{post.post_main_pic.url}}" alt="">
+                        <div class="meta">
+                            <h3>{{post.title}}</h3>
+                            <div class="user-line">
+                                <img src="{{post.author.profile.profile_pic.url}}"  data-user-popover="6" alt="">
+                                <span>{{post.author}}</span>
+                            </div>
+                        </div>
+                    </a>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+{% block scripts %}
+<script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+<script>
+$(document).ready(function() {
+
+
+            $('.add-form').submit(function(e) {
+            e.preventDefault()
+            const addText = $('.add_btn').text()
+            const trim = $.trim(addText)
+            const reciever_id = $(this).attr('id')
+            const url = $(this).attr('action')
+            $.ajax({
+                type: 'POST',
+                url: url,
+                data: {
+                    'csrfmiddlewaretoken': $('input[name=csrfmiddlewaretoken]').val(),
+                    'reciever_id': reciever_id,
+                },
+                success: function(response) {
+                    if(trim === 'Отменять подписку') {
+                        $('.add_btn').text('Подписаться')
+                        $('.add_icon').addClass("is-added")
+                        $('.add_icon').removeClass("not-added")                     
+                    } else {
+                        $('.add_btn').text('Отменять подписку')
+                        $('.add_icon').removeClass("is-added")
+                        $('.add_icon').addClass("not-added")
+                    }
+                },
+                error: function(response) {
+                    alert(response)
+                    console.log('error', response)
+                }
+            })
+
+        })
+
+
+
+
+
+
+
+    var swiper = new Swiper(".mySwiper", {
+        pagination: {
+            el: ".swiper-pagination",
+            type: "fraction",
+        },
+        navigation: {
+            nextEl: ".swiper-button-next",
+            prevEl: ".swiper-button-prev",
+        },
+    });
+    swiper.on('slideChange', function() {
+        // this.activeIndex
+        var hi = $('.swiper-slide-active img').attr('id')
+        console.log(hi)
+    });
+
+
+
+    $('#comment_btn').attr('disabled',true);
+
+    $('#commenttext').keyup(function(){
+        if($(this).val().length !=0)
+            $('#comment_btn').attr('disabled', false);            
+        else
+            $('#comment_btn').attr('disabled',true);
+    })
+
+});
+</script>
+{% endblock scripts %}

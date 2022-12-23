@@ -1,0 +1,105 @@
+{% extends 'base.html' %}
+
+{% block title %}
+<meta name="description" content="Форум дизайнеров">
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="CHARME DESIGN" />
+<meta property="og:url" content="https://sklad.charmestone.ru" />
+{% if designer %}
+<title> Шарм дизайн | {{designer.username}}</title> 
+<meta property="og:title" content={{designer.username}} />
+<meta property="og:image" content={{designer.profile.profile_pic.url}} />
+{% if designer.profile.bio %}
+<meta property="og:description" content={{designer.profile.bio}} />
+{% endif %}
+{% elif post %}
+<title> Шарм дизайн | {{post.author.username}}</title> 
+<meta property="og:title" content={{post.author.username}} />
+<meta property="og:image" content={{post.author.profile.profile_pic.url}} />
+{% if post.author.profile.bio %}
+<meta property="og:description" content={{post.author.profile.bio}} />
+{% endif %}
+{% endif %}
+{% endblock %}
+
+{% block content %}
+<div class="view-wrapper is-full">
+    <div class="stories-wrapper is-home">
+        <!-- sidebar -->
+        {% include 'includes/designer_sidebar.html' %}
+        <!-- Stories -->
+                   <div class="inner-wrapper">
+                <a class="mb-5 mobile-sidebar-trigger is-home-v2">
+                    <i data-feather="menu"></i>
+                </a>
+
+                <!-- Stories content -->
+                <div class="stories-content">
+
+
+                    <div class="stories-feed">
+                        <div class="columns is-multiline">
+                            {% if user_posts  %}
+                        	{% for post in user_posts %}
+                            <div class="column is-4 is-half-tablet">
+                            	
+                                <!--Feed item-->
+                                <div class="story-feed-item is-medium">
+                                    <a class="main_
+                                    pic" href="{% url 'design-detail' post.pk %}"   data-caption="">
+                                        <img class="featured-image" src="{{post.post_main_pic.url}}" alt="">
+                                    </a>
+                                    <a class="item-meta like-container">
+                                        <div class="item-stats">
+                                            <div class="stat-item">
+                               <form action="{% url 'like-post-view' %}" method="POST" class='like-form' id='{{post.id}}'>
+                                    {% csrf_token %}
+                                    <input type="hidden" name="post_id" value={{post.id}}>
+                                    {% if user not in post.liked.all %}
+                                    <button type="submit" class="like_fix details_button like-btn{{post.id}}">
+                                        <i data-feather="heart"></i>
+                                    </button>
+                                    {% else %}
+                                    <button type="submit" class="like_fix details_button is-liked like-btn{{post.id}}">
+                                        <i data-feather="heart"></i>
+                                    </button>
+                                    {% endif %}
+                                </form>
+                                <span class="like-count{{post.id}}">{{post.num_likes}}</span>
+                                    </div>                                
+                                        </div>
+                                    </a>
+                                    <a class="stat-item edit-profilepage" href={% url 'design-detail' post.pk %}>
+                                    <i data-feather="message-circle"></i>
+                                    </a>
+                                {% if user.is_superuser or user.id == post.author.id %}
+                                <a class="stat-item edit-profilepage" href={% url 'update-post' post.pk %}>
+                                <i data-feather="edit"></i>
+                                </a>
+                                <a class="stat-item delete-profilepage" href={% url 'delete-post' post.pk %}>
+                                <i data-feather="delete"></i>
+                                </a>
+                            {% endif %}
+                                </div>
+                            </div>
+                            {% endfor %}
+                            {% else %}
+                            <div class="page-placeholder">
+                <div class="placeholder-content">
+                    <h3>нет публикации!</h3>
+                    <p class="is-large">у этого пользователя пока нет публикаций, Нажмите на кнопку ниже, чтобы вернуться на главную страницу
+                    </p>
+                    <div class="buttons is-centered">
+                        <a href="{% url 'home' %}" class="button is-solid accent-button raised">вернуться на главную страницу</a>
+                    </div>
+                </div>
+            </div>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+    </div>
+</div>
+{% endblock %}
+

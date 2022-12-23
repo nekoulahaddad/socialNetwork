@@ -1,0 +1,432 @@
+<div class="chat-wrapper">
+        <div class="chat-inner">
+
+            <!-- Chat top navigation -->
+            <div class="chat-nav">
+                <div class="nav-start">
+                    <div class="recipient-block">
+                        <div class="avatar-container">
+                            <img class="user-avatar" src="https://via.placeholder.com/300x300" data-demo-src="assets/img/avatars/dan.jpg" alt="">
+                        </div>
+                        <div class="username">
+                            <span>Dan Walker</span>
+                            <span><i data-feather="star"></i> <span>| Online</span></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="nav-end">
+
+                    <!-- Settings icon dropdown -->
+                    <div class="dropdown is-spaced is-neutral is-right dropdown-trigger">
+                        <div>
+                            <a class="chat-nav-item is-icon">
+                                <i data-feather="settings"></i>
+                            </a>
+                        </div>
+                        <div class="dropdown-menu" role="menu">
+                            <div class="dropdown-content">
+                                <a href="#" class="dropdown-item">
+                                    <div class="media">
+                                        <i data-feather="message-square"></i>
+                                        <div class="media-content">
+                                            <h3>Details</h3>
+                                            <small>View this conversation's details.</small>
+                                        </div>
+                                    </div>
+                                </a>
+                                <a class="dropdown-item">
+                                    <div class="media">
+                                        <i data-feather="settings"></i>
+                                        <div class="media-content">
+                                            <h3>Preferences</h3>
+                                            <small>Define your preferences.</small>
+                                        </div>
+                                    </div>
+                                </a>
+                                <hr class="dropdown-divider">
+                                <a class="dropdown-item">
+                                    <div class="media">
+                                        <i data-feather="bell"></i>
+                                        <div class="media-content">
+                                            <h3>Notifications</h3>
+                                            <small>Set notifications settings.</small>
+                                        </div>
+                                    </div>
+                                </a>
+                                <a class="dropdown-item">
+                                    <div class="media">
+                                        <i data-feather="bell-off"></i>
+                                        <div class="media-content">
+                                            <h3>Silence</h3>
+                                            <small>Disable notifications.</small>
+                                        </div>
+                                    </div>
+                                </a>
+                                <hr class="dropdown-divider">
+                                <a class="dropdown-item">
+                                    <div class="media">
+                                        <i data-feather="box"></i>
+                                        <div class="media-content">
+                                            <h3>Archive</h3>
+                                            <small>Archive this conversation.</small>
+                                        </div>
+                                    </div>
+                                </a>
+                                <a class="dropdown-item">
+                                    <div class="media">
+                                        <i data-feather="trash-2"></i>
+                                        <div class="media-content">
+                                            <h3>Delete</h3>
+                                            <small>Delete this conversation.</small>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="chat-search">
+                        <div class="control has-icon">
+                            <input type="text" class="input" placeholder="Search messages">
+                            <div class="form-icon">
+                                <i data-feather="search"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <a class="chat-nav-item is-icon is-hidden-mobile">
+                        <i data-feather="at-sign"></i>
+                    </a>
+                    <a class="chat-nav-item is-icon is-hidden-mobile">
+                        <i data-feather="star"></i>
+                    </a>
+
+                    <!-- More dropdown -->
+                    <div class="dropdown is-spaced is-neutral is-right dropdown-trigger">
+                        <div>
+                            <a class="chat-nav-item is-icon no-margin">
+                                <i data-feather="more-vertical"></i>
+                            </a>
+                        </div>
+                        <div class="dropdown-menu" role="menu">
+                            <div class="dropdown-content">
+                                <a href="#" class="dropdown-item">
+                                    <div class="media">
+                                        <i data-feather="file-text"></i>
+                                        <div class="media-content">
+                                            <h3>Files</h3>
+                                            <small>View all your files.</small>
+                                        </div>
+                                    </div>
+                                </a>
+                                <a class="dropdown-item">
+                                    <div class="media">
+                                        <i data-feather="users"></i>
+                                        <div class="media-content">
+                                            <h3>Users</h3>
+                                            <small>View all users you're talking to.</small>
+                                        </div>
+                                    </div>
+                                </a>
+                                <hr class="dropdown-divider">
+                                <a class="dropdown-item">
+                                    <div class="media">
+                                        <i data-feather="gift"></i>
+                                        <div class="media-content">
+                                            <h3>Daily bonus</h3>
+                                            <small>Get your daily bonus.</small>
+                                        </div>
+                                    </div>
+                                </a>
+                                <a class="dropdown-item">
+                                    <div class="media">
+                                        <i data-feather="download-cloud"></i>
+                                        <div class="media-content">
+                                            <h3>Downloads</h3>
+                                            <small>See all your downloads.</small>
+                                        </div>
+                                    </div>
+                                </a>
+                                <hr class="dropdown-divider">
+                                <a class="dropdown-item">
+                                    <div class="media">
+                                        <i data-feather="life-buoy"></i>
+                                        <div class="media-content">
+                                            <h3>Support</h3>
+                                            <small>Reach our support team.</small>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <a class="chat-nav-item is-icon close-chat">
+                        <i data-feather="x"></i>
+                    </a>
+                </div>
+            </div>
+            <!-- Chat sidebar -->
+            <div id="chat-sidebar" class="users-sidebar">
+                <!-- Header -->
+                <div class="header-item">
+                    <img class="light-image" src="assets/img/logo/friendkit-bold.svg" alt="">
+                    <img class="dark-image" src="assets/img/logo/friendkit-white.svg" alt="">
+                </div>
+                <!-- User list -->
+                <div class="conversations-list has-slimscroll-xs">
+                    <!-- User -->
+                    <div class="user-item" data-chat-user="edward" data-full-name="Edward Mayers" data-status="Online">
+                        <div class="avatar-container">
+                            <img class="user-avatar" src="https://via.placeholder.com/300x300" data-demo-src="assets/img/avatars/edward.jpeg" alt="">
+                            <div class="user-status is-online"></div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Add Conversation -->
+                <div class="footer-item">
+                    <div class="add-button modal-trigger" data-modal="add-conversation-modal"><i data-feather="user"></i></div>
+                </div>
+            </div>
+
+            <!-- Chat body -->
+            <div id="chat-body" class="chat-body is-opened">
+                <!-- Conversation with Edward -->
+                <div id="edward-conversation" class="chat-body-inner has-slimscroll">
+                    <div class="chat-message is-sent">
+                        <img src="https://via.placeholder.com/300x300" data-demo-src="assets/img/avatars/jenna.png" alt="">
+                        <div class="message-block">
+                            <span>5:44pm</span>
+                            <div class="message-text">And yeah, don't forget to bring some of my favourite cheese cake.</div>
+                        </div>
+                    </div>
+                    <div class="chat-message is-received">
+                        <img src="https://via.placeholder.com/300x300" data-demo-src="assets/img/avatars/edward.jpeg" alt="">
+                        <div class="message-block">
+                            <span>5:27pm</span>
+                            <div class="message-text">No worries</div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Compose message area -->
+                <div class="chat-action">
+                    <div class="chat-action-inner">
+                        <div class="control">
+                            <textarea class="textarea comment-textarea" rows="1"></textarea>
+                            <div class="dropdown compose-dropdown is-spaced is-accent is-up dropdown-trigger">
+                                <div>
+                                    <div class="add-button">
+                                        <div class="button-inner">
+                                            <i data-feather="plus"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="dropdown-menu" role="menu">
+                                    <div class="dropdown-content">
+                                        <a href="#" class="dropdown-item">
+                                            <div class="media">
+                                                <i data-feather="code"></i>
+                                                <div class="media-content">
+                                                    <h3>Code snippet</h3>
+                                                    <small>Add and paste a code snippet.</small>
+                                                </div>
+                                            </div>
+                                        </a>
+                                        <a class="dropdown-item">
+                                            <div class="media">
+                                                <i data-feather="file-text"></i>
+                                                <div class="media-content">
+                                                    <h3>Note</h3>
+                                                    <small>Add and paste a note.</small>
+                                                </div>
+                                            </div>
+                                        </a>
+                                        <hr class="dropdown-divider">
+                                        <a class="dropdown-item">
+                                            <div class="media">
+                                                <i data-feather="server"></i>
+                                                <div class="media-content">
+                                                    <h3>Remote file</h3>
+                                                    <small>Add a file from a remote drive.</small>
+                                                </div>
+                                            </div>
+                                        </a>
+                                        <a class="dropdown-item">
+                                            <div class="media">
+                                                <i data-feather="monitor"></i>
+                                                <div class="media-content">
+                                                    <h3>Local file</h3>
+                                                    <small>Add a file from your computer.</small>
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div id="chat-panel" class="chat-panel is-opened">
+                <div class="panel-inner">
+                    <div class="panel-header">
+                        <h3>Details</h3>
+                        <div class="panel-close">
+                            <i data-feather="x"></i>
+                        </div>
+                    </div>
+                    <!-- Edward details -->
+                    <div id="edward-details" class="panel-body is-user-details is-hidden">
+                        <div class="panel-body-inner">
+
+                            <div class="subheader">
+                                <div class="action-icon">
+                                    <i class="mdi mdi-video"></i>
+                                </div>
+                                <div class="action-icon">
+                                    <i class="mdi mdi-camera"></i>
+                                </div>
+                                <div class="action-icon">
+                                    <i class="mdi mdi-microphone"></i>
+                                </div>
+                                <div class="dropdown details-dropdown is-spaced is-neutral is-right dropdown-trigger ml-auto">
+                                    <div>
+                                        <div class="action-icon">
+                                            <i class="mdi mdi-dots-vertical"></i>
+                                        </div>
+                                    </div>
+                                    <div class="dropdown-menu" role="menu">
+                                        <div class="dropdown-content">
+                                            <a href="#" class="dropdown-item">
+                                                <div class="media">
+                                                    <i data-feather="user"></i>
+                                                    <div class="media-content">
+                                                        <h3>View profile</h3>
+                                                        <small>View this user's profile.</small>
+                                                    </div>
+                                                </div>
+                                            </a>
+                                            <a class="dropdown-item">
+                                                <div class="media">
+                                                    <i data-feather="mail"></i>
+                                                    <div class="media-content">
+                                                        <h3>Send message</h3>
+                                                        <small>Send a message to the user's inbox.</small>
+                                                    </div>
+                                                </div>
+                                            </a>
+                                            <hr class="dropdown-divider">
+                                            <a class="dropdown-item">
+                                                <div class="media">
+                                                    <i data-feather="share-2"></i>
+                                                    <div class="media-content">
+                                                        <h3>Share profile</h3>
+                                                        <small>Share this user's profile.</small>
+                                                    </div>
+                                                </div>
+                                            </a>
+                                            <a class="dropdown-item">
+                                                <div class="media">
+                                                    <i data-feather="x"></i>
+                                                    <div class="media-content">
+                                                        <h3>Block user</h3>
+                                                        <small>Block this user permanently.</small>
+                                                    </div>
+                                                </div>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="details-avatar">
+                                <img src="https://via.placeholder.com/300x300" data-demo-src="assets/img/avatars/edward.jpeg" alt="">
+                                <div class="call-me">
+                                    <i class="mdi mdi-phone"></i>
+                                </div>
+                            </div>
+
+                            <div class="user-meta has-text-centered">
+                                <h3>Edward Mayers</h3>
+                                <h4>Financial analyst</h4>
+                            </div>
+
+                            <div class="user-badges">
+                                <div class="hexagon is-red">
+                                    <div>
+                                        <i class="mdi mdi-heart"></i>
+                                    </div>
+                                </div>
+                                <div class="hexagon is-green">
+                                    <div>
+                                        <i class="mdi mdi-dog"></i>
+                                    </div>
+                                </div>
+                                <div class="hexagon is-accent">
+                                    <div>
+                                        <i class="mdi mdi-flash"></i>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="user-about">
+                                <label>About Me</label>
+                                <div class="about-block">
+                                    <i class="mdi mdi-domain"></i>
+                                    <div class="about-text">
+                                        <span>Works at</span>
+                                        <span><a class="is-inverted" href="#">Brettmann Bank</a></span>
+                                    </div>
+                                </div>
+                                <div class="about-block">
+                                    <i class="mdi mdi-map-marker"></i>
+                                    <div class="about-text">
+                                        <span>From</span>
+                                        <span><a class="is-inverted" href="#">Santa Fe</a></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="add-conversation-modal" class="modal add-conversation-modal is-xsmall has-light-bg">
+        <div class="modal-background"></div>
+        <div class="modal-content">
+
+            <div class="card">
+                <div class="card-heading">
+                    <h3>New Conversation</h3>
+                    <!-- Close X button -->
+                    <div class="close-wrap">
+                        <span class="close-modal">
+                            <i data-feather="x"></i>
+                        </span>
+                    </div>
+                </div>
+                <div class="card-body">
+
+                    <img src="assets/img/icons/chat/bubbles.svg" alt="">
+
+                    <div class="field is-autocomplete">
+                        <div class="control has-icon">
+                            <input type="text" class="input simple-users-autocpl" placeholder="Search a user">
+                            <div class="form-icon">
+                                <i data-feather="search"></i>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="help-text">
+                        Select a user to start a new conversation. You'll be able to add other users later.
+                    </div>
+
+                    <div class="action has-text-centered">
+                        <button type="button" class="button is-solid accent-button raised">Start conversation</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>

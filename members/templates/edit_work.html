@@ -1,0 +1,83 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="view-wrapper is-full">
+    {% include 'includes/sidebar.html' %}
+
+    <div class="settings-wrapper">
+        <!-- /partials/settings/sections/general-settings.html -->
+        <div id="general-settings" class="settings-section is-active">
+            <div class="settings-panel">
+                <div class="title-wrap">
+                    <a class="mobile-sidebar-trigger">
+                        <i data-feather="menu"></i>
+                    </a>
+                    <h2>Работа и Образование</h2>
+                </div>
+                <form action="{% url 'addwork' %}" class="profile-form" method="post">
+                    {% csrf_token %}
+                    <div class="settings-form-wrapper">
+                        <div class="settings-form">
+                            <div class="columns is-multiline">
+                                    <div class="column is-12">
+                                        <h2>Работа</h2>
+                                    </div>
+                                <div class="column is-6">
+                                    <div class="field field-group">
+                                        <label>Дата работы ( год )</label>
+                                        <div class="control has-icon">
+                                        <input type="text" placeholder="2015" class="input is-fade" name="work_date" pattern="\d*" maxlength="4">
+                                            <div class="form-icon">
+                                                <i data-feather="calendar"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="column is-6">
+                                    <div class="field field-group">
+                                        <label>Место работы</label>
+                                        <div class="control has-icon">
+                                        <input type="text" class="input is-fade" name="work_place">
+                                            <div class="form-icon">
+                                                <i data-feather="briefcase"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                    <div class="column is-12">
+                                        <h2>Образование</h2>
+                                    </div>
+                                <div class="column is-12">
+                                    <div class="field field-group">
+                                        <label>место обучения</label>
+                                        <div class="control has-icon">
+                                        <input type="text" class="input is-fade" name="education_place">
+                                            <div class="form-icon">
+                                                <i data-feather="book-open"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+ 
+                                <div class="column is-12">
+                                    <div class="buttons">
+                                        <button type="submit" class="button is-solid accent-button form-button">Сохранить изменения</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="illustration">
+                        <p>тут вы можете добавить информацию о работе и учебе, если у вас какие-то вопросы Обратитесь к нам <a href="https://sklad.charmestone.ru/">charmastone</a></p>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+{% block scripts %}
+<script src="/static/js/settings.js"></script>
+{% endblock scripts %}

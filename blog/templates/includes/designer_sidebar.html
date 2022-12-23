@@ -1,0 +1,158 @@
+            <div class="stories-sidebar is-active">
+                <div class="stories-sidebar-inner">
+                    <div class="user-block">
+                        <a class="close-stories-sidebar is-hidden">
+                            <i data-feather="x"></i>
+                        </a>
+                        <div class="avatar-wrap">
+                            {% if designer %}
+                            <a href={% url 'profile' designer.username %}>
+                            <img src="{{designer.profile.profile_pic.url}}" data-user-popover="0" alt="">
+                            </a>
+                            {% if designer.profile.mobile %}
+                            <div class="badge">
+                                <i data-feather="check"></i>
+                            </div>
+                            {% endif %}
+                            {% elif post %}
+                            <a href={% url 'profile' post.author %}>
+                            <img src="{{post.author.profile.profile_pic.url}}"data-user-popover="0" alt="">
+                            </a>
+                            {% if post.author.profile.mobile %}
+                            <div class="badge">
+                                <i data-feather="check"></i>
+                            </div>
+                            {% endif %}
+                            {% endif %}
+                        </div>
+                            {% if designer %}
+                            <h4>{{designer.username}}</h4>
+                            <p>{{designer.profile.city}}</p>
+                            {% elif post %}
+                            <h4>{{post.author}}</h4>
+                            <p>{{post.author.profile.city}}</p>
+                            {% endif %}   
+                        <div class="user-stats">
+                            <div class="stat-block">
+                                <span>подписчиков</span>
+                                {% if designer %}
+                                <span>{{designer.profile.friend_request.all|length}}</span>
+                                {% elif post %}
+                                <span>{{post.author.profile.friend_request.all|length}}</span>
+                                {% endif %}
+                            </div>
+                            <div class="stat-block">
+                                <span>подписан на</span>
+                                {% if designer %}
+                                <span>{{designer.friend_request.all|length}}</span>
+                                {% elif post %}
+                                <span>{{post.author.friend_request.all|length}}</span>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="user-menu">
+                        <div class="user-menu-inner has-slimscroll">
+                            <div class="menu-block">
+                                <ul>
+                                    <li class="is-active">
+                                        {% if designer %}
+                                        <a href={% url 'about_profile' designer.username %}>
+                                            <i data-feather="grid"></i>
+                                            <span>обо {{designer.username}}</span>
+                                        </a>
+                                        {% elif post %}
+                                        <a href={% url 'about_profile' post.author %}>
+                                            <i data-feather="grid"></i>
+                                            <span>обо {{post.author}}</span>
+                                        </a>
+                                        {% endif %}
+                                    </li>
+                                    <li>
+                           {% if designer %}
+                            <a href={% url 'profile' designer.username %}>
+                                            <i data-feather="search"></i>
+                                            <span>посмотреть проекты</span>
+                                        </a>
+                              {% elif post %}
+                            <a href={% url 'profile' post.author %}>              <i data-feather="search"></i>
+                                            <span>посмотреть проекты</span>
+                                        </a>  
+                                    {% endif %}                            
+
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="separator"></div>
+                            <div class="menu-block">
+                                <ul>
+                                    {% if user.is_authenticated %}
+
+                                    {% if designer %}
+                                    {% if user.id != designer.id %}
+                                    <li>
+                                    <form action="{% url 'add-friend-view' %}" method="POST" class='add-form' id='{{designer.id}}'>
+                                    {% csrf_token %}
+                                    <input type="hidden" name="reciever_id" value={{designer.id}}>
+                                    {% if user not in designer.profile.friend_request.all %}
+                                    <button type="submit" class="button is-added add_icon">
+                                        <i class="mr-2" data-feather="user-plus"></i>
+                                        <span class="add_btn">Подписаться</span>
+                                    </button>
+                                        {% else %}
+                                     <button type="submit" class="button not-added add_icon">
+                                        <i class="mr-2" data-feather="user-plus"></i>
+                                        <span class="add_btn">Отменять подписку</span>
+                                    </button>
+                                    {% endif %}
+                                    </form>
+                                    </li>
+                                    {% endif %}
+
+
+                                    {% elif post %}
+                                    {% if user.id != post.author.id %}
+                                    <li>
+                                    <form action="{% url 'add-friend-view' %}" method="POST" class='add-form' id='{{post.author.id}}'>
+                                    {% csrf_token %}
+                                    <input type="hidden" name="reciever_id" value={{post.author.id}}>
+                                    {% if user not in post.author.profile.friend_request.all %}
+                                    <button type="submit" class="button is-added add_icon">
+                                        <i class="mr-2" data-feather="user-plus"></i>
+                                        <span class="add_btn">Подписаться</span>
+                                    </button>
+                                        {% else %}
+                                     <button type="submit" class="button not-added add_icon">
+                                        <i class="mr-2" data-feather="user-plus"></i>
+                                        <span class="add_btn">Отменять подписку</span>
+                                    </button>
+                                        {% endif %}
+                                    </form>
+                                    </li>
+                                    {% endif %}
+                                    
+                                    {% endif %}
+                                    
+                                    {% endif %}
+                                    {% if designer.profile.mobile %}
+                                    <li>
+                                        <a href="https://api.whatsapp.com/send?phone={{designer.profile.mobile}}&text=%D0%97%D0%B4%D1%80%D0%B0%D0%B2%D1%81%D1%82%D0%B2%D1%83%D0%B9%D1%82%D0%B5%2C+%D0%B2%D1%8B+%D0%BC%D0%BE%D0%B6%D0%B5%D1%82%D0%B5+%D0%BC%D0%BD%D0%B5+%D0%BF%D0%BE%D0%BC%D0%BE%D1%87%D1%8C%3F">
+                                            <i data-feather="mail"></i>
+                                            <span>Отправить сообщение</span>
+                                        </a>
+                                    </li>
+                                    {% elif post.author.profile.mobile %}
+                                    <li>
+                                        <a href="https://api.whatsapp.com/send?phone={{post.author.profile.mobile}}&text=%D0%97%D0%B4%D1%80%D0%B0%D0%B2%D1%81%D1%82%D0%B2%D1%83%D0%B9%D1%82%D0%B5%2C+%D0%B2%D1%8B+%D0%BC%D0%BE%D0%B6%D0%B5%D1%82%D0%B5+%D0%BC%D0%BD%D0%B5+%D0%BF%D0%BE%D0%BC%D0%BE%D1%87%D1%8C%3F">
+                                            <i data-feather="mail"></i>
+                                            <span>Отправить сообщение</span>
+                                        </a>
+                                    </li>
+                                    {% endif %}
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+

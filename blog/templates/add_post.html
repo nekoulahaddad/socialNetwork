@@ -1,0 +1,177 @@
+{%  extends 'base.html'  %}
+{% block title %}
+<title> Шарм дизайн | Форум дизайнеров</title>
+{% endblock %}
+{% block content  %}
+
+
+<div class="view-wrapper">  
+            <div id="general-settings" class="settings-section is-active">
+                <div class="settings-panel">
+
+                    <div class="title-wrap">
+                        <h2></h2>
+                    </div>
+<form action="{% url 'add' %}" method="post" class="note-form" enctype="multipart/form-data">{% csrf_token %}
+                    <div class="settings-form-wrapper">
+                        <div class="settings-form">
+                            <div id="selected_pics" class="columns is-multiline">
+
+                                <div class="column is-6">
+                                    <!--Field-->
+                                    <div class="field field-group">
+                                        <label>Заголовок публикации</label>
+                                        <div class="control">
+                                            <input name="title" type="text" class="input is-fade" id="title" placeholder="enter the title of your post">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="column is-6">
+                                    <!--Field-->
+                                    <div class="field field-group">
+                                        <label>Категория публикации</label>
+                                        <div class="control">
+                                          <select name="category" class="input is-fade">
+                                           {% for cat in object_list %}
+                                            <option value="{{cat.name}}">{{cat.russian_name}}</option>
+                                            {% endfor %}
+                                          </select>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="column is-12">
+                                    <!--Field-->
+                                    <div class="field field-group">
+                                        <label>Описание</label>
+                                        <div class="control">
+                                            <textarea name="description" type="text" class="textarea is-fade" rows="10" placeholder="write a description for your project..."></textarea>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="column is-12">
+                                    <!--Field-->
+                                    <div class="form-text">
+                                        <p>Обязательно добавьте картинки для своего проекта ... можно сразу добавить несколько фотографий</p>
+                                    </div>
+                                </div>
+
+                                <div class="column is-6">
+                                  <div id="file-js-example" class="file is-info has-name">
+                                      <label class="file-label">
+                                     <input type="file" name="images" class="file-input" id="note-image" multiple>
+                                      <span class="file-cta">
+                                        <span class="file-icon">
+                                          <i data-feather="upload"></i>
+                                        </span>
+                                        <span class="file-label">
+                                          загрузить фото
+                                        </span>
+                                      </span>
+                                      <span class="file-name">
+                                      </span>
+                                      </label>
+                                      </div>
+                                      <article class="message is-danger is-hidden">
+  <div class="mt-3 message-body">
+    пожалуйста, поставьте заголовок к своей публикации
+  </div>
+</article>
+                                </div>
+
+
+                                <div class="column is-6">
+                                    <div class="buttons">
+                                        <button type="submit" id="submit_post" class="button is-solid accent-button form-button">Добавить публикацию</button>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                    </form>
+                </div>
+            </div>
+
+
+</div>
+
+
+<!-- {% if user.is_authenticated %}
+<form method="post">
+	{% csrf_token %}
+	{{ form.as_p }}
+	<button>go </button>
+
+
+<script>
+	var name = "{{user.id}}";
+	document.getElementById("author").value = name;
+</script> -->
+
+<!-- 
+{% endif %} -->
+{% endblock  %}
+
+
+{% block scripts %}
+<script>
+  const selected_pics = document.getElementById('selected_pics')
+  const fileInput = document.querySelector('#file-js-example input[type=file]');
+
+      $('#submit_post').prop("disabled", true);
+
+    $('#title').keyup(function(){
+        selectedFile = $("#note-image").val().length !=0;
+        console.log(selectedFile)
+        if($(this).val().length !=0 && selectedFile)
+           $('#submit_post').prop("disabled", false);           
+        else
+            $('#submit_post').prop("disabled", true);
+    })
+
+
+     $("#note-image").change(function(evt){
+    window.selectedFile = evt.target.files[0];
+    var terms = $('#title').val().length !=0;
+    console.log(terms)
+    if(window.selectedFile && terms){
+      $('#submit_post').prop("disabled", false);
+    } else {
+      $('#submit_post').prop("disabled", true);
+      $('.message').removeClass('is-hidden')
+    }
+  });
+
+  fileInput.onchange = () => {
+    if (fileInput.files.length > 0) {
+      const fileName = document.querySelector('#file-js-example .file-name');
+      // for(file in fileInput.files)
+      // fileName.textContent = fileInput.files[0].name;
+      console.log(fileInput.files)
+      var file_names = []
+      var file_url = []
+      for (file of fileInput.files){
+        file_names.push(file.name)
+        file_url.push(URL.createObjectURL(file))
+      }
+      console.log(file_url)
+     fileName.textContent = (file_names.slice(1, file_names.length)).join('\r\n');
+
+
+     if(file_names){
+     file_url.forEach(item => {
+    var html = `<div class="column is-3"><img src=${item}></div>`;
+                   
+      selected_pics.insertAdjacentHTML('beforeend', html);
+  })
+
+}
+
+
+    }
+  }
+</script>
+{% endblock scripts %}

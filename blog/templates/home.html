@@ -1,0 +1,152 @@
+{% extends 'base.html' %}
+{% block title %}
+<meta name="description" content="Форум дизайнеров, дизайн кухни, дизайн интерьера, дизайн лестницы">
+<title> Шарм дизайн | Форум дизайнеров</title>
+<meta property="og:title" content="Шарм дизайн | Форум дизайнеров" />
+<meta property="og:description" content="Форум дизайнеров, дизайн кухни, дизайн интерьера, дизайн лестницы" />
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="CHARME Design" />
+{% endblock %}
+{% block content %}
+<div class="view-wrapper">
+    <!-- Container -->
+    <div id="posts-feed" class="container">
+        <!--Stories-->
+        <div class="stories-list">
+            <div class="container-inner">
+                {% for item in cat_menu %}
+                <a class="story" href={% url 'category' item.name|slugify %}>
+                    <div class="dropdown is-hoverable">
+                        <div class="story-avatar dropdown-trigger">
+                            <img class="avatar" src="{{item.category_pic.url}}" data-user-popover="20" alt="">
+                        </div>
+                        <div class="dropdown-menu" id="dropdown-menu4" role="menu">
+                            <div class="dropdown-content">
+                                <div class="dropdown-item">
+                                    <p>{{item.russian_name}}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+                {% endfor %}
+            </div>
+        </div>
+        <!--Posts Grid-->
+        <div class="posts-feed-wrapper is-2x">
+            <div class="columns is-multiline">
+                <!--Post-->
+                {% for post in object_list %}
+                <div class="column design_card is-6">
+                    <div class="card post-feed-item">
+                        <div class="card-image">
+                            <figure class="image is-4by3">
+                                <a href={% url 'design-detail' post.pk %}>
+                                    {% if post.post_main_pic %}
+                                    <img src="{{post.post_main_pic.url}}" alt="">
+                                    {% else %}
+                                    <img src="https://via.placeholder.com/150x150" alt="">
+                                    {% endif %}
+                                </a>
+                            </figure>
+                        </div>
+                        <div class="card-content">
+                            <div class="media">
+                                <div class="media-left">
+                                    <div class="post-avatar">
+                                        <a href={% url 'profile' post.author %}> <img class="avatar" src="{{post.author.profile.profile_pic.url}}" data-user-popover="1" alt="">
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="media-content">
+                                    <span>{{post.author}}</span>
+                                    {% load humanize %}
+                                    <span>{{post.post_date|naturaltime}}</span>
+                                </div>
+                                <div class="media-right">
+                                    <span class="like-count{{post.id}}">{{post.num_likes}}</span><span>лайков</span>
+                                    <form action="{% url 'like-post-view' %}" method="POST" class='like-form' id='{{post.id}}'>
+                                        {% csrf_token %}
+                                        <input type="hidden" name="post_id" value={{post.id}}>
+                                        {% if user not in post.liked.all %}
+                                        <button type="submit" class="button like-btn{{post.id}}">
+                                            <i data-feather="heart"></i>
+                                        </button>
+                                        {% else %}
+                                        <button type="submit" class="button is-liked like-btn{{post.id}}">
+                                            <i data-feather="heart"></i>
+                                        </button>
+                                        {% endif %}
+                                    </form>
+                                    <button class="button">
+                                        <a class="unstyled-link" href={% url 'design-detail' post.pk %}>
+                                            <i data-feather="message-circle"></i>
+                                        </a>
+                                    </button>
+                                    {% if user.is_superuser or user.id == post.author.id %}
+                                    <button class="button">
+                                        <a href={% url 'update-post' post.pk %}>
+                                            <i data-feather="edit"></i>
+                                        </a>
+                                    </button>
+                                    <button class="button">
+                                        <a href={% url 'delete-post' post.pk %}>
+                                            <i data-feather="delete"></i>
+                                        </a>
+                                    </button>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+                <!-- Load more posts load-more-wrap narrow-top / load-more-button -->
+                {% if object_list|length >= 8 %}
+                <div class="column is-12">
+                    <div class="  has-text-centered">
+                        <a href="#" id="loadMore" class="">Показать больше проектов</a>
+                    </div>
+                    <a class="up_button" href="#top"> <i data-feather="arrow-up"></i></a>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+    {% endblock %}
+    {% block scripts %}
+    <script>
+    $(document).ready(function() {
+
+        $(function() {
+            $(".design_card").slice(0, 8).show();
+            $("#loadMore").on('click', function(e) {
+                e.preventDefault();
+                $(".design_card:hidden").slice(0, 4).slideDown();
+                if ($(".design_card:hidden").length == 0) {
+                    $("#load").fadeOut('slow');
+                }
+                $('html,body').animate({
+                    scrollTop: $(this).offset().top
+                }, 1500);
+            });
+        });
+
+        $('a[href=#top]').click(function() {
+            $('body,html').animate({
+                scrollTop: 0
+            }, 600);
+            return false;
+        });
+
+        $(window).scroll(function() {
+            if ($(this).scrollTop() > 50) {
+                $('.up_button').fadeIn();
+            } else {
+                $('.up_button').fadeOut();
+            }
+        });
+
+    });
+    </script>
+    {% endblock scripts %}

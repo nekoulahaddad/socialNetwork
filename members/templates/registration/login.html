@@ -1,0 +1,81 @@
+{%  extends 'base.html'  %}
+
+{% block content  %}
+
+<div class="login-wrapper">
+
+        <!-- Main Wrapper -->
+        <div class="login-wrapper columns is-gapless">
+            <!--Left Side (Desktop Only)-->
+            <div class="column is-6 is-hidden-mobile hero-banner">
+                <div class="hero is-fullheight is-login">
+                    <div class="hero-body">
+                        <div class="container">
+                            <div class="left-caption">
+                                <h2>Charma Stone</h2>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--Right Side-->
+            <div class="column is-6">
+                <div class="hero form-hero is-fullheight">
+                    <!--Logo-->
+                    <div class="logo-wrap">
+                        <div class="wrap-inner">
+                            <img src="assets/img/logo/friendkit-white.svg" alt="">
+                        </div>
+                    </div>
+                    <!--Login Form-->
+                    <div class="hero-body">
+                        <div class="form-wrapper">
+                            <!--Form-->
+                            <div class="login-form">
+    	                   <form method="POST">
+							{% csrf_token %}
+                            {{ form.non_field_errors }}
+                                <div class="field">
+                                    <div class="control">
+                                        <input name="username" class="input email-input" type="text" placeholder="jenna123">
+                                        <div class="input-icon">
+                                            <i data-feather="user"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="field">
+                                    <div class="control">
+                                        <input name="password" class="input password-input" type="password" placeholder="●●●●●●●">
+                                        <div class="input-icon">
+                                            <i data-feather="lock"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="field">
+                                    <div class="control">
+                                        <button class="button is-solid primary-button raised is-rounded is-fullwidth">Войти</button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="section forgot-password">
+                                <div class="has-text-centered">
+                                    Нет учетной записи?<a class="ml-2" href="{% url 'register' %}">Зарегистрироваться</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+
+
+
+
+
+{% endblock  %}

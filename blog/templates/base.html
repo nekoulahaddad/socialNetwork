@@ -1,0 +1,43 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    {% block title %}
+    <meta property="og:image" content="https://sklad.charmestone.ru//storage/Pages/699d7be3-475c-4c8e-b813-9dd1948b93b4.jpg" />
+    {% endblock %}
+    <link rel="icon" type="image/jpg" href="https://sklad.charmestone.ru//storage/Pages/699d7be3-475c-4c8e-b813-9dd1948b93b4.jpg" />
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:600,700,800,900" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:400,500" rel="stylesheet">
+    {% include 'includes/stylesheets.html' %}
+    {% block css %}
+    {% endblock %}
+    {% csrf_token %}
+</head>
+
+<body class="is-white">
+    <!-- Pageloader -->
+    <div class="pageloader"></div>
+    <div class="infraloader is-active"></div>
+    <div class="app-overlay"></div>
+    
+    <div id="main-navbar" class="navbar navbar-v1 is-inline-flex is-transparent no-shadow is-hidden-mobile">
+        {% if user.is_authenticated %}
+    {% include 'includes/navbar_logged.html' %}
+        {% else %}
+    {% include 'includes/navbar_notlogged.html' %}
+        {% endif %}
+    {% block content %}
+    {% endblock %}
+    </div>
+    {% include 'includes/scripts.html' %}
+    {% block scripts %}
+    {% endblock %}
+</body>
+
+</html>

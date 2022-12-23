@@ -1,0 +1,299 @@
+{% extends 'base.html' %}
+{% block title %}
+<meta name="description" content="Форум дизайнеров, дизайн кухни, дизайн интерьера, дизайн лестницы">
+<title> Шарм дизайн | список дизайнеров</title>
+<meta property="og:title" content="Шарм дизайн | Форум дизайнеров" />
+<meta property="og:description" content="Форум дизайнеров, дизайн кухни, дизайн интерьера, дизайн лестницы" />
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="CHARME Design" />
+{% endblock %}
+{% block content %}
+<div class="view-wrapper">
+    <!-- /partials/global/options-nav/friends-options-nav.html -->
+    <div class="options-nav no-shadow">
+        <div class="container is-fluid">
+            <div class="nav-inner is-friends">
+                <a id="show-filters" class="nav-item is-icon">
+                    <i data-feather="filter"></i>
+                </a>
+                <a id="hide-filters" class="nav-item is-icon is-hidden">
+                    <i data-feather="x"></i>
+                </a>
+                <div class="option-tabs is-friends">
+                    <a class="option-tab is-active" data-tab="all-friends">
+                        <span>Все</span>
+                    </a>
+                    <a class="option-tab" data-tab="starred-friends">
+                        <span>по лайкам</span>
+                    </a>
+                    <a class="option-tab" data-tab="new-friends">
+                        <span>по проектам</span>
+                    </a>
+                    <div class="option-naver"></div>
+                </div>
+                <div class="end-group">
+                    <div class="nav-item is-friend-count">{{number_of_designers}} дизайнеров</div>
+                    <div id="subsearch" class="nav-item is-search is-hidden">
+                        <div class="control">
+                            <input type="text" class="input textFilter-input" placeholder="Search your friends">
+                        </div>
+                    </div>
+                    <a id="show-subsearch" class="nav-item is-icon">
+                        <i data-feather="search"></i>
+                    </a>
+                    <a id="hide-subsearch" class="nav-item is-icon is-hidden">
+                        <i data-feather="x"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div><!-- /partials/global/sidebar/friends-filters-panel.html -->
+    <div class="filters-panel">
+        <div class="panel-inner">
+            <h3 class="panel-title">Фильтр</h3>
+            <div class="filter-block">
+                <div class="control is-combo">
+                    <div class="combo-label">Город</div>
+                    <div class="combo-box">
+                        <div class="box-inner">
+                            <div class="combo-item">
+                                <i class="mdi mdi-account-search-outline"></i>
+                                <span class="selected-item">Выберите город</span>
+                            </div>
+                        </div>
+                        <div class="box-chevron">
+                            <i data-feather="chevron-down"></i>
+                        </div>
+                        <div class="box-dropdown">
+                            <div class="dropdown-inner has-slimscroll">
+                                <ul>
+                                    <li>
+                                        <span class="item-icon">
+                                            <i class="mdi mdi-account-multiple-outline"></i>
+                                        </span>
+                                        <span class="item-name">Все</span>
+                                        <span class="checkmark">
+                                            <i data-feather="check"></i>
+                                        </span>
+                                    </li>
+                                    <li>
+                                        <span class="item-icon">
+                                            <i class="mdi mdi-heart-circle-outline"></i>
+                                        </span>
+                                        <span class="item-name">Москва</span>
+                                        <span class="checkmark">
+                                            <i data-feather="check"></i>
+                                        </span>
+                                    </li>
+                                    <li>
+                                        <span class="item-icon">
+                                            <i class="mdi mdi-briefcase-outline"></i>
+                                        </span>
+                                        <span class="item-name">Санкт петербург</span>
+                                        <span class="checkmark">
+                                            <i data-feather="check"></i>
+                                        </span>
+                                    </li>
+                                    <li>
+                                        <span class="item-icon">
+                                            <i class="mdi mdi-account-group-outline"></i>
+                                        </span>
+                                        <span class="item-name">Казан</span>
+                                        <span class="checkmark">
+                                            <i data-feather="check"></i>
+                                        </span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="filter-block">
+                <div class="control is-combo">
+                    <div class="combo-label">Дизайнер</div>
+                    <div class="image-combo-box has-rounded-images is-scrollable">
+                        <div class="box-inner">
+                            <div class="combo-item">
+                                <img src="https://via.placeholder.com/150x150" data-demo-src="assets/img/icons/logos/fastpizza.svg" alt="">
+                                <span class="selected-item">Выберите Дизайн</span>
+                            </div>
+                        </div>
+                        <div class="box-chevron">
+                            <i data-feather="chevron-down"></i>
+                        </div>
+                        <div class="box-dropdown">
+                            <div class="dropdown-inner has-slimscroll">
+                                <ul>
+                                    <li>
+                                        <span class="item-icon">
+                                            <img src="https://via.placeholder.com/150x150" data-demo-src="assets/img/icons/logos/fastpizza.svg" alt="">
+                                        </span>
+                                        <span class="item-name">Дизайн интерьера</span>
+                                        <span class="checkmark">
+                                            <i data-feather="check"></i>
+                                        </span>
+                                    </li>
+                                    <li>
+                                        <span class="item-icon">
+                                            <img src="https://via.placeholder.com/150x150" data-demo-src="assets/img/icons/logos/lonelydroid.svg" alt="">
+                                        </span>
+                                        <span class="item-name">дизайн экстерьера</span>
+                                        <span class="checkmark">
+                                            <i data-feather="check"></i>
+                                        </span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div><!-- /partials/global/pageloader/subloaders/grey-subloader.html -->
+    <div id="friends-page" class="friends-wrapper main-container">
+        <!--First tab-->
+        <div id="all-friends" class="card-row-wrap is-active">
+            <div class="card-row-placeholder is-hidden">
+                No matching results
+            </div>
+            <div class="card-row">
+                <!-- /partials/pages/friends/friend-lists/all-friends.html -->
+                <!--Friend-->
+                {% for desginer in user_posts%}
+                <div class="card-flex friend-card">
+                    <div class="star-friend is-active">
+                        <i data-feather="star"></i>
+                    </div>
+                    <div class="img-container">
+                        <a href={% url 'profile' desginer.username %}>
+                            <img class="avatar" src="{{desginer.profile.profile_pic.url}}" alt="">
+                        </a>
+                    </div>
+                    <div class="friend-info">
+                        <h3>{{desginer.username}}</h3>
+                        <p>{{desginer.profile.city}}</p>
+                    </div>
+                    <div class="friend-stats">
+                        <div class="stat-block">
+                            <label>Проектов</label>
+                            <div class="stat-number">
+                                {{desginer.post_set.all|length}}
+                            </div>
+                        </div>
+                        <div class="stat-block">
+                            <label>Подписчиков</label>
+                            <div class="stat-number">
+                                {{desginer.profile.friend_request.all|length}}
+                            </div>
+                        </div>
+                        <div class="stat-block">
+                            <label>лайков</label>
+                            <div class="stat-number">
+                                {{desginer.total_likes}}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+        <!--Second tab-->
+        <div id="starred-friends" class="card-row-wrap">
+            <div class="card-row-placeholder is-hidden">
+                No matching results
+            </div>
+            <div class="card-row">
+                <!-- /partials/pages/friends/friend-lists/starred-friends.html -->
+                <!--Friend-->
+                {% for desginer in user_by_like%}
+                <div class="card-flex friend-card">
+                    <div class="star-friend is-active">
+                        <i data-feather="star"></i>
+                    </div>
+                    <div class="img-container">
+                        <a href={% url 'profile' desginer.username %}>
+                            <img class="avatar" src="{{desginer.profile.profile_pic.url}}" alt="">
+                        </a>
+                    </div>
+                    <div class="friend-info">
+                        <h3>{{desginer.username}}</h3>
+                        <p>{{desginer.profile.city}}</p>
+                    </div>
+                    <div class="friend-stats">
+                        <div class="stat-block">
+                            <label>Проектов</label>
+                            <div class="stat-number">
+                                {{desginer.post_set.all|length}}
+                            </div>
+                        </div>
+                        <div class="stat-block">
+                            <label>Подписчиков</label>
+                            <div class="stat-number">
+                                {{desginer.profile.friend_request.all|length}}
+                            </div>
+                        </div>
+                        <div class="stat-block">
+                            <label>лайков</label>
+                            <div class="stat-number">
+                                {{desginer.total_likes}}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+        <!--third tab-->
+        <div id="new-friends" class="card-row-wrap">
+            <div class="card-row-placeholder is-hidden">
+                No matching results
+            </div>
+            <div class="card-row">
+                <!-- /partials/pages/friends/friend-lists/new-friends.html -->
+                <!--Friend-->
+                {% for desginer in user_by_post%}
+                <div class="card-flex friend-card">
+                    <div class="star-friend is-active">
+                        <i data-feather="star"></i>
+                    </div>
+                    <div class="img-container">
+                        <a href={% url 'profile' desginer.username %}>
+                            <img class="avatar" src="{{desginer.profile.profile_pic.url}}" alt="">
+                        </a>
+                    </div>
+                    <div class="friend-info">
+                        <h3>{{desginer.username}}</h3>
+                        <p>{{desginer.profile.city}}</p>
+                    </div>
+                    <div class="friend-stats">
+                        <div class="stat-block">
+                            <label>Проектов</label>
+                            <div class="stat-number">
+                                {{desginer.post_set.all|length}}
+                            </div>
+                        </div>
+                        <div class="stat-block">
+                            <label>Подписчиков</label>
+                            <div class="stat-number">
+                                {{desginer.profile.friend_request.all|length}}
+                            </div>
+                        </div>
+                        <div class="stat-block">
+                            <label>лайков</label>
+                            <div class="stat-number">
+                                {{desginer.total_likes}}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+{% block scripts %}
+{% load static %}
+<script src="{% static 'js/friends.js' %}"></script>
+{% endblock scripts %}

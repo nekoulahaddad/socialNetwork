@@ -1,0 +1,23 @@
+{%  extends 'base.html'  %}
+{% block title %}
+<title> Шарм дизайн | Форум дизайнеров</title>
+{% endblock %}
+{% block content  %}
+
+<div class="center-screen">
+<h1 class="has-text-danger">удаление записи ... {{post.title}}</h1>
+<br/>
+
+{% if user.is_authenticated %}
+<form method="post">
+	{% csrf_token %}
+	<div class="mgb-large">
+	<strong>Вы уверены, что хотите удалить эту запись !!</strong>
+	</div>
+	<div class="mt-2">
+	<button class="mgb-large button is-danger is-outlined">Удалить</button>
+	</div>
+{% endif%}
+
+</div>
+{% endblock  %}

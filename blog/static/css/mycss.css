@@ -1,0 +1,349 @@
+.navbar-v1 .navbar-brand, .navbar-brand {
+margin-right: 0px !important;
+}
+
+
+#imageUpload{
+    display: none;
+}
+
+#profileImage{
+    cursor: pointer;
+}
+
+.image-upload-wrapper .process .photo_upload .preview .upload {
+    position: absolute;
+    top: 0;
+    right: 0;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    height: 36px;
+    width: 36px;
+    border-radius: 50%;
+    border: 3px solid #fff;
+    background: #cecece;
+    -webkit-transition: all .3s;
+    transition: all .3s;
+}
+
+.image-upload-wrapper .process .photo_upload .preview img {
+    display: block;
+    height: 100px;
+    width: 100px;
+    border-radius: 50%;
+}
+
+
+.image-upload-wrapper .process .photo_upload .preview {
+    position: relative;
+    height: 120px;
+    width: 120px;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    border-radius: 50%;
+    border: 1.4px solid #cecece;
+    margin: 0 auto;
+}
+
+
+.design_card{
+  display: none;
+}
+
+
+#loadMore {
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    display: inline-block;
+    width: 15em;
+    height: 2.75em;
+    padding: .5em 1em;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    text-align: center;
+    color: #757a91 !important;
+    white-space: nowrap;
+    line-height: 1.5;
+    font-size: 1em;
+    text-decoration: none;
+    -webkit-transition: width .1s ease,height .4s ease,border-width .4s ease,border-radius .4s ease,border-color .4s ease,padding .4s ease;
+    transition: width .1s ease,height .4s ease,border-width .4s ease,border-radius .4s ease,border-color .4s ease,padding .4s ease;
+}
+
+
+
+.up_button svg{
+    border: 1px solid black;
+    border-radius: 50%;
+    height: 30px;
+    width: 30px;
+}
+#loadMore {
+transition: all 600ms ease-in-out;
+    -webkit-transition: all 600ms ease-in-out;
+    -moz-transition: all 600ms ease-in-out;
+    -o-transition: all 600ms ease-in-out;
+}
+
+
+
+.dropdown-menu {
+    min-width: none;
+}
+
+.columns .column .email-field{
+  background-color: #f5f5f5 !important;
+}
+
+.date{
+  width: 200px;
+  font-size: 2em;
+}
+
+.media .no_notification span {
+
+text-align: center !important;
+}
+
+.center-screen {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  min-height: 100vh;
+}
+
+.stories-wrapper .inner-wrapper .mobile-sidebar-trigger.is-home-v2 svg {
+margin-bottom: 25px;
+}
+
+.details_button {
+background-color: transparent;
+border:none;
+cursor: pointer;
+}
+
+/*.details_button:hover {
+border:none;
+}*/
+
+.navbar-item.is-icon .details_button {
+    border: none;
+    position: relative;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    width: 38px;
+    height: 38px;
+    border-radius: 8px;
+    -webkit-transition: all .3s;
+    transition: all .3s;
+}
+
+
+.navbar-item.is-icon .details_button:hover,.navbar-item.is-icon .details_button.is-active{
+  background:#6ba4e9 !important;
+}
+
+
+
+.like-form .is-liked svg {
+	stroke:#f71416 !important;
+	fill:#f71416;
+}
+
+.is-added,.not-added{
+  border:none;
+  background: none !important;
+  padding: 0 !important;
+  outline-offset: 0;
+  cursor: pointer;
+}
+
+.is-added:focus, 
+.button.is-focused,
+.not-added:focus,
+.is-added:active,
+.not-added:active,
+{
+border-color:black !important;
+outline: none !important;
+}
+
+
+.button:hover{
+    background-color: transparent;
+    border-color: transparent;
+  }
+
+ .button:focus {
+    border-color: transparent;
+    box-shadow: none;
+  }
+   .button:active {
+    border-color: transparent;
+    box-shadow: none;
+  }
+
+.button:focus:not(:active), .button.is-focused:not(:active) {
+    -webkit-box-shadow: 0 0 0 0;
+    box-shadow: 0 0 0 0;
+}
+
+
+
+.is-added svg {
+  stroke:#6ba4e9;
+}
+
+.not-added svg {
+  stroke:#f71416;
+}
+
+
+.add_btn{
+    color: #393a4f;
+    font-family: "Montserrat",sans-serif;
+    font-size: .8rem;
+    font-weight: 600;
+    margin-left: 6px;
+}
+
+
+
+
+.like_fix svg{
+   margin-top: 0.4em;
+}
+
+:root {
+    --swiper-theme-color: #555555 !important;
+}
+
+
+.stories-list .container-inner .story .category_selected{
+  background: #6ba4e9 !important;
+    position: relative;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    height: 60px;
+    width: 60px;
+    min-width: 60px;
+    border-radius: 50%;
+    border: 1.6px solid #cecece;
+    -webkit-transition: all .3s;
+    transition: all .3s;
+}
+
+.stories-list .container-inner{
+  display: flex;
+  justify-content: center !important;
+}
+
+.options-nav .container .nav-inner .option-tabs{
+  width:400px !important;
+}
+
+
+.navbar-end .navbar-item .control .login{
+  background-color: #6ba4e9 !important;
+  padding: 0.5em 1em 0.5em 1em;
+  border-radius: 10%;
+  color: white;
+}
+
+
+.stories-feed .columns .column .story-feed-item .main_pic img,.featured-image{
+  height: 300px !important;
+  width: 100% !important;
+}
+
+
+.like-container{
+  display: inline-flex !important;
+}
+
+.edit-profilepage svg, .delete-profilepage svg{
+width: 16px;
+height:16px;
+margin-left: 10px;
+stroke-width: 1.4px;
+stroke: #393a4f;
+}
+
+
+      .container-swiper {
+        border-radius: 5%;
+        position: relative;
+        height: 400px;
+        background: black;
+        font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+        font-size: 14px;
+        color: #000;
+        margin: 0;
+        padding: 0;
+      }
+
+      .swiper-container {
+        border-radius: 5%;
+        width: 100%;
+        height: 100%;
+      }
+
+      .swiper-slide {
+        border-radius: 5%;
+        text-align: center;
+        font-size: 18px;
+        background: #fff;
+
+        /* Center slide text vertically */
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: -webkit-flex;
+        display: flex;
+        -webkit-box-pack: center;
+        -ms-flex-pack: center;
+        -webkit-justify-content: center;
+        justify-content: center;
+        -webkit-box-align: center;
+        -ms-flex-align: center;
+        -webkit-align-items: center;
+        align-items: center;
+      }
+
+      .swiper-slide img {
+        border-radius: 5%;
+        display: block;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
